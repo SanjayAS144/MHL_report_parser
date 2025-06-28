@@ -1,0 +1,222 @@
+{
+  "partner_name": "swiggy",
+  "partner_type": "platform",
+  "data_sources": [
+    {
+      "source_name": "payout_annexure",
+      "source_type": "excel",
+      "file_patterns": ["*invoice-Annexure*.xlsx", "*payout*.xlsx"],
+      "sheets": [
+        {
+          "sheet_name": "Summary",
+          "header_row": 0,
+          "skip_rows": 0,
+          "data_type": "payout_summary",
+          "column_mappings": {
+            "restaurant_name": "Restaurant Name",
+            "location": "Location",
+            "restaurant_id": "Rest_ID",
+            "gstin": "GSTIN",
+            "payout_period": "Payout Period",
+            "payout_settlement_date": "Payout Settlement Date",
+            "total_payout": "Total Payout",
+            "total_orders": "Total Orders (Delivered + Cancelled)",
+            "bank_utr": "Bank UTR"
+          }
+        },
+        {
+          "sheet_name": "Payout Breakup",
+          "header_row": 2,
+          "skip_rows": 2,
+          "data_type": "payout_breakup",
+          "column_mappings": {
+            "description": "Description",
+            "amount": "Amount (₹)",
+            "percentage": "Percentage (%)",
+            "total_orders": "Total Orders",
+            "avg_per_order": "Avg per Order (₹)"
+          }
+        },
+        {
+          "sheet_name": "Order Level",
+          "header_row": 2,
+          "skip_rows": 2,
+          "data_type": "order_details",
+          "column_mappings": {
+            "order_id": "Order ID",
+            "order_date": "Order Date",
+            "order_time": "Order Time",
+            "customer_name": "Customer Name",
+            "customer_phone": "Customer Phone",
+            "delivery_address": "Delivery Address",
+            "order_value": "Order Value (₹)",
+            "item_total": "Item Total (₹)",
+            "delivery_charges": "Delivery Charges (₹)",
+            "platform_fee": "Platform Fee (₹)",
+            "gst_on_delivery": "GST on Delivery (₹)",
+            "discount_by_restaurant": "Discount by Restaurant (₹)",
+            "discount_by_swiggy": "Discount by Swiggy (₹)",
+            "total_discount": "Total Discount (₹)",
+            "amount_payable": "Amount Payable (₹)",
+            "commission": "Commission (₹)",
+            "commission_gst": "Commission GST (₹)",
+            "payment_gateway_charges": "Payment Gateway Charges (₹)",
+            "payment_gateway_gst": "Payment Gateway GST (₹)",
+            "delivery_partner_fee": "Delivery Partner Fee (₹)",
+            "other_charges": "Other Charges (₹)",
+            "net_payout": "Net Payout (₹)",
+            "order_status": "Order Status",
+            "payment_mode": "Payment Mode",
+            "delivery_type": "Delivery Type"
+          }
+        },
+        {
+          "sheet_name": "Unresolved Customer Complaints",
+          "header_row": 2,
+          "skip_rows": 2,
+          "data_type": "complaints",
+          "column_mappings": {
+            "order_id": "Order ID",
+            "order_date": "Order Date",
+            "complaint_type": "Complaint Type",
+            "complaint_description": "Complaint Description",
+            "complaint_amount": "Complaint Amount (₹)",
+            "status": "Status",
+            "resolution_date": "Resolution Date"
+          }
+        },
+        {
+          "sheet_name": "Other charges and deductions",
+          "header_row": 4,
+          "skip_rows": 4,
+          "data_type": "charges_deductions",
+          "column_mappings": {
+            "charge_type": "Charge Type",
+            "description": "Description",
+            "amount": "Amount (₹)",
+            "order_id": "Order ID",
+            "date": "Date",
+            "reference": "Reference"
+          }
+        },
+        {
+          "sheet_name": "Discount Summary",
+          "header_row": 1,
+          "skip_rows": 1,
+          "data_type": "discount_summary",
+          "column_mappings": {
+            "discount_type": "Discount Type",
+            "discount_name": "Discount Name",
+            "total_discount": "Total Discount (₹)",
+            "restaurant_share": "Restaurant Share (₹)",
+            "swiggy_share": "Swiggy Share (₹)",
+            "orders_count": "Orders Count"
+          }
+        },
+        {
+          "sheet_name": "Glossary",
+          "header_row": 1,
+          "skip_rows": 1,
+          "data_type": "glossary",
+          "column_mappings": {
+            "term": "Term",
+            "description": "Description"
+          }
+        }
+      ]
+    }
+  ],
+  "data_transformations": [
+    {
+      "source_sheet": "Summary",
+      "target_table": "partners",
+      "transformation_rules": [
+        {
+          "source_column": "restaurant_name",
+          "target_column": "partner_name",
+          "data_type": "string"
+        },
+        {
+          "source_column": "restaurant_id",
+          "target_column": "partner_external_id",
+          "data_type": "string"
+        },
+        {
+          "source_column": "gstin",
+          "target_column": "gstin",
+          "data_type": "string"
+        }
+      ]
+    },
+    {
+      "source_sheet": "Order Level",
+      "target_table": "orders",
+      "transformation_rules": [
+        {
+          "source_column": "order_id",
+          "target_column": "order_external_id",
+          "data_type": "string"
+        },
+        {
+          "source_column": "order_date",
+          "target_column": "order_date",
+          "data_type": "date",
+          "date_format": "%Y-%m-%d"
+        },
+        {
+          "source_column": "order_time",
+          "target_column": "order_time",
+          "data_type": "time",
+          "time_format": "%H:%M:%S"
+        },
+        {
+          "source_column": "order_value",
+          "target_column": "total_amount",
+          "data_type": "decimal",
+          "transformation": "currency_to_decimal"
+        },
+        {
+          "source_column": "order_status",
+          "target_column": "order_status",
+          "data_type": "string",
+          "value_mapping": {
+            "Delivered": "delivered",
+            "Cancelled": "cancelled",
+            "Refunded": "refunded"
+          }
+        }
+      ]
+    }
+  ],
+  "validation_rules": [
+    {
+      "rule_type": "required_fields",
+      "fields": ["order_id", "order_date", "order_value"],
+      "sheet": "Order Level"
+    },
+    {
+      "rule_type": "data_type_validation",
+      "field": "order_date",
+      "expected_type": "date",
+      "sheet": "Order Level"
+    },
+    {
+      "rule_type": "numeric_validation",
+      "field": "order_value",
+      "min_value": 0,
+      "sheet": "Order Level"
+    }
+  ],
+  "metadata": {
+    "created_date": "2025-01-11",
+    "version": "1.0",
+    "description": "Configuration for parsing Swiggy payout annexure Excel files with multiple sheets including order details, discounts, and settlement information",
+    "supported_file_formats": ["xlsx"],
+    "notes": [
+      "Payout annexure contains multiple sheets with different header rows",
+      "Summary sheet contains restaurant and payout period information",
+      "Order Level sheet contains detailed transaction data",
+      "Discount Summary shows shared discount responsibilities"
+    ]
+  }
+} 
