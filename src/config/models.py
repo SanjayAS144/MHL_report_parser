@@ -36,7 +36,7 @@ class TransformationType(str, Enum):
     CONCAT = "concat"
 
 
-class ColumnMapping(BaseModel):
+    class ColumnMapping(BaseModel):
     """Configuration for column mapping."""
     source_column: str = Field(..., description="Source column name")
     system_column: str = Field(..., description="Target system column name")

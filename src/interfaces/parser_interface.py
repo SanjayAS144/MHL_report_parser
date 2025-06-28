@@ -10,6 +10,12 @@ import pandas as pd
 class IFileParser(ABC):
     """Abstract interface for file parsers."""
 
+    def __init__(self, file_path: Path, config: Dict[str, Any]):
+        self.file_path = file_path
+        self.config = config
+        self.encoding = config.get('encoding', 'utf-8')
+        self.sheets_config = config.get('sheets_config', [])
+
     @abstractmethod
     def can_parse(self, file_path: Path) -> bool:
         """Check if this parser can handle the given file."""

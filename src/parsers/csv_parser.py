@@ -11,6 +11,9 @@ from ..interfaces.parser_interface import IFileParser
 
 class CSVParser(IFileParser):
     """Parser for CSV files."""
+
+    def __init__(self, file_path: Path, config: Dict[str, Any]):
+        super().__init__(file_path, config)
     
     def can_parse(self, file_path: Path) -> bool:
         """Check if this parser can handle the given file."""
@@ -31,14 +34,15 @@ class CSVParser(IFileParser):
         
         try:
             # Get configuration
-            encoding = config.get('encoding', 'utf-8')
-            sheets_config = config.get('sheets_config', [])
             
             # Find matching sheet config
             sheet_config = None
             file_name = file_path.name
+
+            # clean columns first
+            df =
             
-            for sc in sheets_config:
+            for sc in self.sheets_config:
                 if sc['sheet_name'] == file_name or sc['sheet_name'] == file_path.stem:
                     sheet_config = sc
                     break
@@ -54,15 +58,15 @@ class CSVParser(IFileParser):
             headers_row = sheet_config.get('headers_row', 1) - 1  # Convert to 0-based
             skip_rows = sheet_config.get('skip_rows', [])
             
-            logger.debug(f"Reading CSV with encoding: {encoding}")
+            logger.debug(f"Reading CSV with encoding: {self.encoding}")
             
             # Try to detect delimiter
-            delimiter = self._detect_delimiter(file_path, encoding)
+            delimiter = self._detect_delimiter(file_path, self.encoding)
             
             # Read CSV file
             df = pd.read_csv(
                 file_path,
-                encoding=encoding,
+                encoding=self.encoding,
                 delimiter=delimiter,
                 header=headers_row,
                 skiprows=skip_rows,
