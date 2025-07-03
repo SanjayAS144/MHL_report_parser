@@ -39,7 +39,7 @@ class ExcelReader(BaseReader):
 
                 df = sheets[sheet_name]
                 df = self._realign_header(df, sheet_cfg.get(HEADER_COLUMNS))
-                df = self._parse(df, sheet_cfg.get(COLUMN_MAPPING))
+                df = self._parse(sheet_cfg.get(COLUMN_MAPPING),df)
                 result.append(df)
 
         return result

@@ -29,17 +29,28 @@ class BaseReader(ABC):
         """
         pass
 
-    def _find_header_row_index(self, df: pd.DataFrame, expected_columns: list) -> int:
+    def find_best_header_row(self, df: pd.DataFrame, expected_columns: list[str]) -> int:
+        max_matches = 0
+        best_row_index = -1
+
         for idx, row in df.iterrows():
-            if list(row.astype(str).str.strip()) == expected_columns:
-                return idx
-        raise ValueError("Header row not found.")
+            row_values = row.astype(str).str.strip().tolist()
+            matches = sum(1 for a, b in zip(row_values, expected_columns) if a == b)
+
+            if matches > max_matches:
+                max_matches = matches
+                best_row_index = idx
+
+        if best_row_index == -1:
+            raise ValueError("No matching header row found.")
+
+        return best_row_index
 
     def _realign_header(self, df: pd.DataFrame, expected_columns: list) -> pd.DataFrame:
         df = clean_dataframe_columns(df)
         columns = df.columns.tolist()
         df = clean_df_rows(df, columns)
-        header_idx = self._find_header_row_index(df, expected_columns)
+        header_idx = self.find_best_header_row(df, expected_columns)
         df = df.iloc[header_idx + 1:].reset_index(drop=True)
         df.columns = expected_columns
         return df
