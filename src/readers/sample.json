@@ -1,0 +1,309 @@
+{
+    "partner_name": "swiggy",
+    "source_config": [
+        {
+            "file_name": "swiggy_test.xlsx",
+            "sheet_config": [
+                {
+                    "sheet_name": "Order Level",
+                    "header_columns": [
+                        "Order ID",
+                        "Parent Order ID",
+                        "Order Date",
+                        "Order Status",
+                        "Order Category",
+                        "Order Payment Type",
+                        "Cancelled By?",
+                        "Coupon type applied by customer",
+                        "Item Total",
+                        "Packaging Charges",
+                        "Restaurant Discounts (Promo, Freebies, Flat Off, etc.)",
+                        "Swiggy One \nExclusive Offer Discount",
+                        "Restaurant Discount Share [3a+3b]",
+                        "Net Bill Value (before taxes) [1+2-3]",
+                        "GST Collected",
+                        "Total Customer Paid [4+5]",
+                        "Commission charged on",
+                        "Service Fees %",
+                        "Commission",
+                        "Long Distance Charges\n",
+                        "Discount on Long Distance Fee",
+                        "Pocket Hero Fees",
+                        "Swiggy One Fees",
+                        "Payment Collection Charges\n",
+                        "Restaurant Cancellation Charges\n",
+                        "Call Center Charges\n",
+                        "Delivery Fee sponsored by Restaurant (w/o tax)",
+                        "Bolt Fees",
+                        "GST on Service Fee @18%\n",
+                        "Total Swiggy Fees\n[6+7+8-9+10+11+12+13+14+15+16]",
+                        "Customer Cancellations\n",
+                        "Customer Complaints",
+                        "Complaint & Cancellation Charges\n[17+18]",
+                        "GST Deduction\n",
+                        "TCS",
+                        "TDS",
+                        "Total Taxes\n[19+20+21]",
+                        "Net Payout for Order (after taxes)\n[A-B-C-D]",
+                        "Long Distance Order\n",
+                        "Last Mile (in km)",
+                        "MFR Accurate?",
+                        "MFR Pressed?",
+                        "Coupon Code Sourced",
+                        "Discount Campaign ID",
+                        "Replicated Order",
+                        "Base order ID",
+                        "Cancellation time",
+                        "Pick Up Status",
+                        "Swiggy One Customer?",
+                        "Pocket Hero Order?"
+                    ],
+                    "column_mapping": {
+                        "partner_name": [
+                            "Partner Name"
+                        ],
+                        "partner_code": [
+                            "Partner Code"
+                        ],
+                        "partner_id": [
+                            "Partner ID"
+                        ],
+                        "settlement_id": [
+                            "Settlement ID"
+                        ],
+                        "settlement_period_start": [
+                            "Period From"
+                        ],
+                        "settlement_type": [
+                            "Particulars"
+                        ],
+                        "total_delivered_orders": [
+                            "Delivered Orders"
+                        ],
+                        "total_cancelled_orders": [
+                            "Cancelled Orders"
+                        ],
+                        "total_orders": [
+                            "Total Orders"
+                        ],
+                        "original_order_id": [
+                            "Order ID"
+                        ],
+                        "parent_order_id": [
+                            "Parent Order ID"
+                        ],
+                        "order_date": [
+                            "Order Date"
+                        ],
+                        "order_status": [
+                            "Order Status"
+                        ],
+                        "order_category": [
+                            "Order Category"
+                        ],
+                        "payment_type": [
+                            "Order Payment Type"
+                        ],
+                        "cancelled_by": [
+                            "Cancelled By?"
+                        ],
+                        "coupon_type": [
+                            "Coupon type applied by customer"
+                        ],
+                        "gross_order_value": [
+                            "Item Total"
+                        ],
+                        "packaging_charges": [
+                            "Packaging Charges"
+                        ],
+                        " Flat Off": [
+                            "Restaurant Discounts (Promo, Freebies, Flat Off, etc.)"
+                        ],
+                        "swiggy_one_discount": [
+                            "Swiggy One \\nExclusive Offer Discount"
+                        ],
+                        "restaurant_discount_share": [
+                            "Restaurant Discount Share [3a+3b]"
+                        ],
+                        "net_bill_value": [
+                            "Net Bill Value (before taxes) [1+2-3]"
+                        ],
+                        "total_tax": [
+                            "GST Collected"
+                        ],
+                        "order_value": [
+                            "Total Customer Paid [4+5]"
+                        ],
+                        "commissionable_value": [
+                            "Commission charged on"
+                        ],
+                        "commission_rate": [
+                            "Service Fees %"
+                        ],
+                        "platform_commission": [
+                            "Commission"
+                        ],
+                        "long_distance_charges": [
+                            "Long Distance Charges\\n"
+                        ],
+                        "distance_fee_discount": [
+                            "Discount on Long Distance Fee"
+                        ],
+                        "pocket_hero_fees": [
+                            "Pocket Hero Fees"
+                        ],
+                        "swiggy_one_fees": [
+                            "Swiggy One Fees"
+                        ],
+                        "payment_collection_charges": [
+                            "Payment Collection Charges\\n"
+                        ],
+                        "cancellation_charges": [
+                            "Restaurant Cancellation Charges\\n"
+                        ],
+                        "call_center_charges": [
+                            "Call Center Charges\\n"
+                        ],
+                        "sponsored_delivery_fee": [
+                            "Delivery Fee sponsored by Restaurant (w/o tax)"
+                        ],
+                        "bolt_fees": [
+                            "Bolt Fees"
+                        ],
+                        "service_fee_gst": [
+                            "GST on Service Fee @18%\\n"
+                        ],
+                        "total_platform_fees": [
+                            "Total Swiggy Fees\\n[6+7+8-9+10+11+12+13+14+15+16]"
+                        ],
+                        "customer_cancellation_charges": [
+                            "Customer Cancellations\\n"
+                        ],
+                        "customer_complaint_charges": [
+                            "Customer Complaints"
+                        ],
+                        "total_penalty_charges": [
+                            "Complaint & Cancellation Charges\\n[17+18]"
+                        ],
+                        "gst_deduction": [
+                            "GST Deduction\\n"
+                        ],
+                        "tcs_amount": [
+                            "TCS"
+                        ],
+                        "tds_amount": [
+                            "TDS"
+                        ],
+                        "total_taxes": [
+                            "Total Taxes\\n[19+20+21]"
+                        ],
+                        "net_payout": [
+                            "Net Payout for Order (after taxes)\\n[A-B-C-D]"
+                        ],
+                        "is_long_distance": [
+                            "Long Distance Order\\n"
+                        ],
+                        "distance_km": [
+                            "Last Mile (in km)"
+                        ],
+                        "is_mfr_accurate": [
+                            "MFR Accurate?"
+                        ],
+                        "is_mfr_pressed": [
+                            "MFR Pressed?"
+                        ],
+                        "coupon_code": [
+                            "Coupon Code Sourced"
+                        ],
+                        "campaign_id": [
+                            "Discount Campaign ID"
+                        ],
+                        "is_replicated": [
+                            "Replicated Order"
+                        ],
+                        "base_order_id": [
+                            "Base order ID"
+                        ],
+                        "cancelled_time": [
+                            "Cancellation time"
+                        ],
+                        "pickup_status": [
+                            "Pick Up Status"
+                        ],
+                        "is_swiggy_one": [
+                            "Swiggy One Customer?"
+                        ],
+                        "is_pocket_hero": [
+                            "Pocket Hero Order?"
+                        ],
+                        "settlement_period": [
+                            "Current Period"
+                        ],
+                        "regular_orders": [
+                            "Regular orders"
+                        ],
+                        "processed_orders": [
+                            "Processed"
+                        ],
+                        "adjustment_type": [
+                            "Adjustment Type"
+                        ],
+                        "total_adjustment_amount": [
+                            "Total Amount"
+                        ],
+                        "settled_adjustment_amount": [
+                            "Settled Amount"
+                        ],
+                        "outstanding_adjustment_amount": [
+                            "Outstanding Amount"
+                        ],
+                        "settlement_period_end": [
+                            "Period To"
+                        ],
+                        "invoice_number": [
+                            "Invoice Number"
+                        ],
+                        "adjustment_remarks": [
+                            "Remarks"
+                        ],
+                        "validity_period": [
+                            "Validity"
+                        ],
+                        "coupon_details": [
+                            "Coupon Details"
+                        ],
+                        "restaurant_share_percentage": [
+                            "Restaurant Share (%)"
+                        ],
+                        "total_discount_amount": [
+                            "Total Discount Given"
+                        ],
+                        "target_customers": [
+                            "Target Customers"
+                        ],
+                        "discount_remarks": [
+                            "Remarks"
+                        ],
+                        "term_id": [
+                            "S No"
+                        ],
+                        "term_name": [
+                            "Particulars"
+                        ],
+                        "term_definition": [
+                            "Definition"
+                        ]
+                    },
+                    "dtype_mapping": {},
+                    "date_conversion_template": {
+                        "due_date": {
+                            "out_key": "due_date",
+                            "in_format": "in_format",
+                            "out_format": "out_format"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

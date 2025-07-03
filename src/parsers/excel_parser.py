@@ -11,6 +11,9 @@ from ..interfaces.parser_interface import IFileParser
 
 class ExcelParser(IFileParser):
     """Parser for Excel files (.xlsx, .xls)."""
+
+    def __init__(self, file_path: Path, config: Dict[str, Any]):
+        super().__init__(file_path, config)
     
     def can_parse(self, file_path: Path) -> bool:
         """Check if this parser can handle the given file."""

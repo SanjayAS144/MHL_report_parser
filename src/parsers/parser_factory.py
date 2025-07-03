@@ -1,7 +1,7 @@
 """Parser factory implementation."""
 
 from pathlib import Path
-from typing import List, Optional
+from typing import List, Optional, Dict, Any
 
 from loguru import logger
 
@@ -12,11 +12,13 @@ from .excel_parser import ExcelParser
 
 class ParserFactory(IParserFactory):
     """Factory for creating appropriate file parsers."""
-    
-    def __init__(self):
+
+
+    def __init__(self, file_path: Path, config: Dict[str, Any]):
         """Initialize parser factory with default parsers."""
         self._parsers: List[IFileParser] = []
         self._register_default_parsers()
+        super().__init__(file_path, config)
     
     def _register_default_parsers(self):
         """Register default parsers."""

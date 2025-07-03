@@ -1,0 +1,6 @@
+FILE_NAME = "file_name"
+SHEET_CONFIG = "sheet_config"
+SHEET_NAME = "sheet_name"
+SOURCE_CONFIG = "source_config"
+COLUMN_MAPPING = "column_mapping"
+HEADER_COLUMNS = "header_columns"
